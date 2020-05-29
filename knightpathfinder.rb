@@ -3,12 +3,20 @@ class KnightPathFinder
 
     def self.valid_moves(pos)
         x, y = pos
-        possible_moves = []
-        
+        possible_moves = [[x+2, y+1], [x+2, y-1], [x+1, y+2], [x+1, y-2], 
+            [x-2, y+1], [x-2, y-1], [x-1, y+2], [x-1, y-2]]
+        possible_moves.reject!{|move| move if !within_grid(move)}
+        possible_moves
+    end
+
+    def self.within_grid(pos)
+        x, y = pos
+        return false if x < 0 || x > 7
+        return false if y < 0 || y > 7
+        true
     end
 
     def initialize(pos)
-        @grid = Array.new(8){Array.new(8)}
         root_node = PolyTreeNode.new(pos)
         build_move_tree
         @considered_positions = [pos]
@@ -28,3 +36,4 @@ class KnightPathFinder
 end
 
 knight = KnightPathFinder.new([0,1])
+p KnightPathFinder.valid_moves([0,2])
