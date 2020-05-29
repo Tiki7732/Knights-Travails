@@ -27,6 +27,10 @@ class KnightPathFinder
     end
 
     def new_move_positions(pos)
+        possible_moves = KnightPathFinder.valid_moves(pos)
+        possible_moves.reject!{|move| move if @considered_positions.include?(move)}
+        @considered_positions.concat(possible_moves)
+        possible_moves
 
     end
 
@@ -36,4 +40,5 @@ class KnightPathFinder
 end
 
 knight = KnightPathFinder.new([0,1])
-p KnightPathFinder.valid_moves([0,2])
+p knight.new_move_positions([0,1])
+p knight.new_move_positions([2,0])
