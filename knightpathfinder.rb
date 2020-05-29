@@ -11,8 +11,8 @@ class KnightPathFinder
 
     def self.within_grid(pos)
         x, y = pos
-        return false if x < 0 || x > 7
-        return false if y < 0 || y > 7
+        return false if !x.between?(0, 7)
+        return false if !y.between?(0, 7)
         true
     end
 
