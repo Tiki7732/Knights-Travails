@@ -16,13 +16,32 @@ class KnightPathFinder
         true
     end
 
+    attr_reader :considered_positions
+
     def initialize(pos)
-        root_node = PolyTreeNode.new(pos)
-        build_move_tree
+        @root_node = PolyTreeNode.new(pos)
         @considered_positions = [pos]
+        build_move_tree
+        
     end
 
     def build_move_tree
+        nodes = [@root_node]
+        while !nodes.empty?
+            current_node = nodes.shift
+            make_next_row(current_node)
+            nodes.concat(current_node.children)
+        end
+
+    end
+
+    def make_next_row(parent_node)
+        children = new_move_positions(parent_node.value)
+        children.each do |child| 
+            child_node = PolyTreeNode.new(child)
+            child_node.parent = parent_node
+            parent_node.add_child(child_node)
+        end
 
     end
 
@@ -40,5 +59,6 @@ class KnightPathFinder
 end
 
 knight = KnightPathFinder.new([0,1])
-p knight.new_move_positions([0,1])
-p knight.new_move_positions([2,0])
+# p knight.considered_positions
+# p "+++"
+# p knight.new_move_positions([0,1])
