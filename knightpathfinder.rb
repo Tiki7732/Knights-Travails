@@ -73,8 +73,8 @@ class KnightPathFinder
     end
 end
 
-knight = KnightPathFinder.new([0,0])
-p knight.find_path([7,6])
+# knight = KnightPathFinder.new([0,0])
+# p knight.find_path([7,6])
 # p knight.considered_positions
 # p "+++"
 # p knight.new_move_positions([0,1])
