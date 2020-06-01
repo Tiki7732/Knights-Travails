@@ -54,12 +54,14 @@ class KnightPathFinder
 
     end
 
-    def find_path
-
+    def find_path(target_pos)
+        target_node = self.root_node.bfs(target_pos)
+        return target_node.value
     end
 end
 
 knight = KnightPathFinder.new([0,1])
+p knight.find_path([6,5])
 # p knight.considered_positions
 # p "+++"
 # p knight.new_move_positions([0,1])
